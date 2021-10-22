@@ -14,6 +14,7 @@ import Order from './src/screens/order';
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar style="dark" />
       <Stack.Navigator
         screenOptions={{
           headerShown: false

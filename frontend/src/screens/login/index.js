@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 import { 
     KeyboardView, 
     Title, 
@@ -14,6 +17,65 @@ import {
 import Header from '../../components/Header'
 
 export default function Login({ navigation }) {
+    const [email, setEmail] = useState()
+    const [senha, setSenha] = useState()
+
+    const submitData = async () => {
+        const data = {
+            email: email,
+            senha: senha
+        }
+
+        const result = await fetch('http://10.0.2.2:3000/login', {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        return await result.json()
+    }
+
+
+    const verify = async () => {
+        const data = await submitData()
+
+
+        if(data.auth) {
+            await storeData(data.token)
+            navigation.navigate('Order')
+        } else {
+            alert('erro')
+        }
+    }
+
+    const storeData = async (token) => {
+        try {
+            await AsyncStorage.setItem(
+                'token',
+                JSON.stringify(token)
+              );
+        } catch (error) {
+            alert('nao salvou o token')
+        }
+    };
+    
+    const getData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('token')
+          if(value !== null) {
+            // value previously stored
+
+            alert(value)
+          }
+        } catch(e) {
+          // error reading value
+        }
+    }
+    
+
+
     return (
         <>
         <KeyboardView>
@@ -24,25 +86,23 @@ export default function Login({ navigation }) {
                 <Input 
                     placeholderTextColor="gray"
                     placeholder="email"
+                    onChangeText={text => setEmail(text)}
                 />
                 <Input 
                     placeholderTextColor="gray"
                     placeholder="senha"
                     secureTextEntry
+                    onChangeText={text => setSenha(text)}
                 />
-                <ButtonSubmit>
+                <ButtonSubmit onPress={verify}>
                     <TextSubmit>Entrar</TextSubmit>
                 </ButtonSubmit>
             </Container>
             
             <ContainerLogin>
-                <ButtonLogin  onPress={() => navigation.navigate('Signup')}>Faça Login Aqui!</ButtonLogin>
+                <ButtonLogin  onPress={() => navigation.navigate('Signup')}>Se Cadastre Aqui!</ButtonLogin>
             </ContainerLogin>
         </KeyboardView> 
-        
-        
-        
-
         </>
         
     )

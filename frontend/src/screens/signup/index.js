@@ -27,8 +27,8 @@ export default function Signup({ navigation }) {
         senha: senha
     }
 
-    const submitData = () => {
-        fetch('http://10.0.2.2:3000/cadastro', {
+    const submitData = async () => {
+        await fetch('http://10.0.2.2:3000/cadastro', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export default function Signup({ navigation }) {
                 />
 
 
-                <ButtonSubmit>
+                <ButtonSubmit onPress={submitData}>
                     <TextSubmit>Cadastrar</TextSubmit>
                 </ButtonSubmit>
             </Container>

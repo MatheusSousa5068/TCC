@@ -16,6 +16,27 @@ import Header from '../../components/Header'
 
 
 export default function Order({ navigation }) {
+    // verificação de login
+    const getToken = async () => {
+        try {
+          const value = await AsyncStorage.getItem('token')
+          if(value !== null) {
+              return true
+          } else {
+              return false
+          }
+        } catch(e) {
+          alert('erro ao tentar pegar token')
+        }
+    }
+
+
+    const isAuth = async () => {
+        (!getToken()) ? navigation.navigate('Login') : true
+    }
+
+    isAuth()
+
     const [pedido, setPedido] = useState()
     const [descped, setDescped] = useState()
 

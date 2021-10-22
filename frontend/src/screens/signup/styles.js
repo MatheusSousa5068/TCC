@@ -33,7 +33,6 @@ export const Input = styled.TextInput`
 `
 
 export const ButtonSubmit = styled.TouchableOpacity`
-    top: 35px;
     background-color: #FF682B;
     border-radius: 9px;
     width: 50%;
@@ -50,4 +49,14 @@ export const TextSubmit = styled.Text`
 export const Text = styled.Text`
     color: #000;
     margin-bottom: 12px;
+`
+
+export const ButtonLogin = styled.Text`
+    color: #5B5A5A;
+    font-size: 15px;
+    text-decoration: underline;
+`
+export const ContainerLogin = styled.TouchableOpacity`
+    align-items: center;
+    margin-bottom: 25px;
 `

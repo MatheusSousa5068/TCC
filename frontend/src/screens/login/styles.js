@@ -51,3 +51,13 @@ export const TextSubmit = styled.Text`
 export const Text = styled.Text`
     color: #000;
 `
+
+export const ButtonLogin = styled.Text`
+    color: #5B5A5A;
+    font-size: 15px;
+    text-decoration: underline;
+`
+export const ContainerLogin = styled.TouchableOpacity`
+    align-items: center;
+    margin-bottom: 25px;
+`

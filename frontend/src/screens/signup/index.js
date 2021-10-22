@@ -7,12 +7,14 @@ import {
     Input, 
     ButtonSubmit, 
     TextSubmit ,
-    Text
+    Text,
+    ContainerLogin,
+    ButtonLogin
 } from './styles'
 
 import Header from '../../components/Header'
 
-export default function Signup(params) {
+export default function Signup({ navigation }) {
     const [nome, setNome] = useState()
     const [email, setEmail] = useState()
     const [senha, setSenha] = useState()
@@ -68,12 +70,14 @@ export default function Signup(params) {
                 />
 
 
-                <ButtonSubmit onPress={submitData}>
+                <ButtonSubmit>
                     <TextSubmit>Cadastrar</TextSubmit>
                 </ButtonSubmit>
             </Container>
             
-            <Text>Ainda não é cadastrado? Faça login aqui</Text>
+            <ContainerLogin>
+                <ButtonLogin  onPress={() => navigation.navigate('Login')}>Faça Login Aqui!</ButtonLogin>
+            </ContainerLogin>
         </KeyboardView> 
         
         

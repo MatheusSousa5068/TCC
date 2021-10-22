@@ -14,7 +14,8 @@ import {
 
 import Header from '../../components/Header'
 
-export default function Order() {
+
+export default function Order({ navigation }) {
     const [pedido, setPedido] = useState()
     const [descped, setDescped] = useState()
 

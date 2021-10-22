@@ -6,24 +6,27 @@ import {
     Input, 
     ButtonSubmit, 
     TextSubmit ,
-    Text
+    Text,
+    ButtonLogin,
+    ContainerLogin
 } from './styles'
 
 import Header from '../../components/Header'
 
-export default function Login(params) {
+export default function Login({ navigation }) {
     return (
         <>
         <KeyboardView>
             <Header />
+            
             <Container>
                 <Title>Login</Title>
                 <Input 
-                    placeholderTextColor="#000"
+                    placeholderTextColor="gray"
                     placeholder="email"
                 />
                 <Input 
-                    placeholderTextColor="#000"
+                    placeholderTextColor="gray"
                     placeholder="senha"
                     secureTextEntry
                 />
@@ -32,11 +35,13 @@ export default function Login(params) {
                 </ButtonSubmit>
             </Container>
             
-            
+            <ContainerLogin>
+                <ButtonLogin  onPress={() => navigation.navigate('Signup')}>Faça Login Aqui!</ButtonLogin>
+            </ContainerLogin>
         </KeyboardView> 
         
         
-        <Text>Ainda não é cadastrado? Faça login aqui</Text>
+        
 
         </>
         

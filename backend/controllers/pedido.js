@@ -1,5 +1,5 @@
 // Models
-const { insert } = require('../models/pedido')
+const { insert, getAll } = require('../models/pedido')
 
 
 const pedido = async (req, res) => {
@@ -12,4 +12,11 @@ const pedido = async (req, res) => {
     res.sendStatus(200)
 }
 
-module.exports = { pedido }
+const listarPedidos = async (req, res) => {
+    const json = await getAll()
+
+    res.setHeader("content-type", "application/json")
+    res.send(json)
+}
+
+module.exports = { pedido, listarPedidos }

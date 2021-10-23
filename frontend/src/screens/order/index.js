@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { StyleSheet } from 'react-native'
+import { Button } from 'react-native';
+
 
 import { 
     KeyboardView, 
@@ -20,10 +22,8 @@ export default function Order({ navigation }) {
     const getToken = async () => {
         try {
           const value = await AsyncStorage.getItem('token')
-          if(value !== null) {
-              return true
-          } else {
-              return false
+          if(value == null) {
+              navigation.navigate('Login')
           }
         } catch(e) {
           alert('erro ao tentar pegar token')
@@ -32,10 +32,22 @@ export default function Order({ navigation }) {
 
 
     const isAuth = async () => {
-        (!getToken()) ? navigation.navigate('Login') : true
+        if (!getToken()) {
+            
+        }
     }
 
-    isAuth()
+    const removeValue = async () => {
+        try {
+          await AsyncStorage.removeItem('token')
+          navigation.navigate('Home')
+        } catch(e) {
+          // remove error
+        }
+
+      }
+
+    getToken()
 
     const [pedido, setPedido] = useState()
     const [descped, setDescped] = useState()
@@ -45,7 +57,8 @@ export default function Order({ navigation }) {
     const data = {
         pedido: pedido,
         descped: descped,
-        tipo_projet: "App"
+        tipo_projet: "App",
+        concluido: "false"
     }
 
     const submitData = () => {
@@ -62,6 +75,13 @@ export default function Order({ navigation }) {
         <>
         <KeyboardView>
             <Header />
+
+            <Button
+                style={{flex: 1, color: 'red'}}
+                title="Logout"
+                onPress={removeValue}
+            />
+
             <Container>
                 <Title>Faça seu pedido</Title>
 

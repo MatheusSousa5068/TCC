@@ -34,6 +34,7 @@ async function verificar(email) {
 }
 
 
+
 module.exports = {
  criarUsuario, verificar
 }

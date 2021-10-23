@@ -18,7 +18,8 @@ async function up() {
             codped INTEGER PRIMARY KEY,
             pedido TEXT,
             descped TEXT,
-            tipo_projet TEXT
+            tipo_projet TEXT,
+            concluido TEXT
         );
     `
 

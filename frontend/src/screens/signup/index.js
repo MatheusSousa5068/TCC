@@ -49,6 +49,7 @@ export default function Signup({ navigation }) {
                 <Input
                     placeholderTextColor="gray"
                     placeholder="Usuário"
+                    onChangeText={text => setNome(text)}
                 />
 
                 <Input 
@@ -60,7 +61,6 @@ export default function Signup({ navigation }) {
                     placeholderTextColor="gray"
                     placeholder="Senha"
                     secureTextEntry
-                    onChangeText={text => setNome(text)}
                 />
                 <Input 
                     placeholderTextColor="gray"

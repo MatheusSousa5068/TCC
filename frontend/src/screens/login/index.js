@@ -61,18 +61,6 @@ export default function Login({ navigation }) {
         }
     };
     
-    const getData = async () => {
-        try {
-          const value = await AsyncStorage.getItem('token')
-          if(value !== null) {
-            // value previously stored
-
-            alert(value)
-          }
-        } catch(e) {
-          // error reading value
-        }
-    }
     
 
 

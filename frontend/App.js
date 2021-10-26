@@ -11,6 +11,9 @@ import Home from './src/screens/home';
 import Signup from './src/screens/signup';
 import Order from './src/screens/order';
 
+import Worker from './src/screens/worker';
+import WorkerPed from './src/screens/workerPed';
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -23,9 +26,11 @@ export default function App() {
           name="Home"
           component={Home}
         />
+        <Stack.Screen name="Worker" component={Worker} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Order" component={Order} />
+        <Stack.Screen name="WorkerPed" component={WorkerPed} />
       </Stack.Navigator>
     </NavigationContainer>
   );

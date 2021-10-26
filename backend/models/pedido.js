@@ -31,7 +31,26 @@ async function getAll() {
     return pedidos
 }
 
+async function getSpecific(codped) {
+    const db = await conn();
+    const sql = `
+        SELECT * FROM pedido where codped = ${codped};
+    `
+
+    const pedidos = await db.get(sql)
+
+    return pedidos
+}
+
+async function deleteSpecific(codped) {
+    const db = await conn()
+    const sql = `
+        DELETE FROM pedido where codped = ${codped}
+    `
+
+    await db.run(sql)
+}
 
 module.exports = {
-    insert, getAll
+    insert, getAll, getSpecific, deleteSpecific
 }

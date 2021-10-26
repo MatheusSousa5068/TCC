@@ -20,7 +20,7 @@ export default function Home({ navigation }) {
 
             
             <ContainerLogin>
-                <ButtonLogin  onPress={() => navigation.navigate('Login')}>Faça Login Aqui!</ButtonLogin>
+                <ButtonLogin  onPress={() => navigation.navigate('Worker')}>É um funcionário Fabric?</ButtonLogin>
             </ContainerLogin>
             
         </Container>

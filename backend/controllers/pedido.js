@@ -1,5 +1,5 @@
 // Models
-const { insert, getAll } = require('../models/pedido')
+const { insert, getAll, getSpecific, deleteSpecific } = require('../models/pedido')
 
 
 const pedido = async (req, res) => {
@@ -16,7 +16,24 @@ const listarPedidos = async (req, res) => {
     const json = await getAll()
 
     res.setHeader("content-type", "application/json")
-    res.send(json)
+    res.json(json)
 }
 
-module.exports = { pedido, listarPedidos }
+const buscarPedido = async (req, res) => {
+    const { codped } = req.body
+
+    const result = await getSpecific(codped)
+    
+    
+    res.send(result)
+}
+
+const deletarPedido = async (req, res) => {
+    const { codped } = req.body
+
+    const result = await deleteSpecific(codped)
+
+    res.send("pedido deletado")
+}
+
+module.exports = { pedido, listarPedidos, buscarPedido, deletarPedido }

@@ -3,7 +3,7 @@ const router = express.Router()
 
 
 // Controllers
-const { pedido, listarPedidos } = require('./controllers/pedido')
+const { pedido, listarPedidos, buscarPedido, deletarPedido } = require('./controllers/pedido')
 
 
 const { cadastro, login } = require('./controllers/usuario')
@@ -20,6 +20,10 @@ router.post('/login', login)
 
 
 router.get('/pedidos', listarPedidos)
+
+router.post('/pedidoCod', buscarPedido)
+
+router.post('/delete', deletarPedido)
 
 
 module.exports = router

@@ -50,7 +50,9 @@ export const TextSubmit = styled.Text`
 
 export const Text = styled.Text`
     color: #000;
+    margin: 5px 0px;
 `
+
 
 export const ButtonLogin = styled.Text`
     color: #5B5A5A;

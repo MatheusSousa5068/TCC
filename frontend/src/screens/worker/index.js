@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button, Text, FlatList, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
 import axios from 'axios'
 
 
-import { Space, ContainerButton } from './styles'
+import { Space, ContainerButton, Header, HeaderDiv, Button, ButtonContainer, Text } from './styles'
 
 export default function Worker({ navigation }) {
 
@@ -23,29 +23,33 @@ export default function Worker({ navigation }) {
         return data
     }
 
-    const aler = () => {
-        alert('clicou')
-    }
+    useEffect(() => {
+        get();
+    }, []);
 
     return (
         <>
-            <Space />
-            <Button title="et" onPress={get} />
+            <HeaderDiv>
+                <Header>Projetos Encomendados</Header>
+            </HeaderDiv>
+
+            
 
             <ContainerButton>
-                {dados.map((dado) => (
+                {dados !== [] && dados.map((dado, key ) => (
 
-                <>    
+                <ButtonContainer key={key}>    
 
                 <Button onPress={async () => {
                     try {
                         await AsyncStorage.setItem('codped', JSON.stringify(dado.codped))
-                        alert('dado salvo')
                         navigation.navigate('WorkerPed')
                     } catch (error) {
                         alert(error)
                     }
-                }} title={dado.pedido} />
+                }} >
+                    <Text>{dado.pedido}</Text>
+                </Button>
                 
                 <CheckBox
                     disabled={false}
@@ -64,9 +68,9 @@ export default function Worker({ navigation }) {
                         })
 
                         get()
-    }}
-  />
-                </>
+                    }}
+                />
+                </ButtonContainer>
                 ))}
 
                 

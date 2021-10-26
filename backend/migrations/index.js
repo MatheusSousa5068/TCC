@@ -24,7 +24,7 @@ async function up() {
     `
 
   const sql3 = `
-        CREATE TABLE cli_ped(
+        CREATE TABLE cli_ped (
             email varchar(20),
             codped serial,
             FOREIGN KEY (email) REFERENCES consumidor(email),
@@ -32,11 +32,21 @@ async function up() {
         );
     `
 
+  const sql4 = `
+        CREATE TABLE funcionario (
+            id INTEGER PRIMARY KEY,
+            email TEXT UNIQUE,
+            nome TEXT,
+            senha TEXT
+        );
+  `
+
   const db = await conn();
 
   await db.run(sql)
   await db.run(sql2)
   await db.run(sql3)
+  await db.run(sql4)
 
 }
 

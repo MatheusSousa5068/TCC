@@ -23,7 +23,7 @@ async function insert(body) {
 async function getAll() {
     const db = await conn();
     const sql = `
-        SELECT * FROM pedido LIMIT 5;
+        SELECT * FROM pedido where concluido = "false" LIMIT 5;
     `
 
     const pedidos = await db.all(sql)
@@ -45,7 +45,7 @@ async function getSpecific(codped) {
 async function deleteSpecific(codped) {
     const db = await conn()
     const sql = `
-        DELETE FROM pedido where codped = ${codped}
+        UPDATE pedido SET concluido = "true" where codped = ${codped}
     `
 
     await db.run(sql)

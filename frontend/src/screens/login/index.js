@@ -89,6 +89,8 @@ export default function Login({ navigation }) {
             
             <ContainerLogin>
                 <ButtonLogin  onPress={() => navigation.navigate('Signup')}>Se Cadastre Aqui!</ButtonLogin>
+                <Text>Ou</Text>
+                <ButtonLogin onPress={() => navigation.navigate('Home')}>Volte para a HomePage</ButtonLogin>
             </ContainerLogin>
         </KeyboardView> 
         </>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { Button } from 'react-native';
 
 
 import { 
@@ -11,7 +10,9 @@ import {
     Input, 
     ButtonSubmit, 
     TextSubmit ,
-    Text
+    ButtonLogout,
+    Text,
+    TextContainer
 } from './styles'
 
 import Header from '../../components/Header'
@@ -69,27 +70,23 @@ export default function Order({ navigation }) {
             },
             body: JSON.stringify(data)
         })
+
+        alert('Pedido Criado com Sucesso')
     }
     
     return (
         <>
         <KeyboardView>
+            
             <Header />
+            
+            
 
-            <Button
-                style={{flex: 1, color: 'red'}}
-                title="Logout"
-                onPress={removeValue}
-            />
+            
 
             <Container>
                 <Title>Faça seu pedido</Title>
 
-                <Input 
-                    placeholderTextColor="gray"
-                    placeholder="Confirme sua senha"
-                    secureTextEntry      
-                />
 
                 <Input
                     placeholderTextColor="gray"
@@ -114,6 +111,9 @@ export default function Order({ navigation }) {
                 <ButtonSubmit onPress={submitData}>
                     <TextSubmit>Cadastrar</TextSubmit>
                 </ButtonSubmit>
+
+                <TextContainer><Text onPress={removeValue}>Faça logout aqui</Text></TextContainer>
+                
             </Container>
             
         </KeyboardView> 

@@ -6,9 +6,33 @@ import CheckBox from '@react-native-community/checkbox';
 import axios from 'axios'
 
 
-import { Space, ContainerButton, Header, HeaderDiv, Button, ButtonContainer, Text } from './styles'
+import { Space, ContainerButton, Header, HeaderDiv, Button, ButtonContainer, Text, TextContainer } from './styles'
 
 export default function Worker({ navigation }) {
+    // verificação de login
+    const getToken = async () => {
+        try {
+          const value = await AsyncStorage.getItem('@Fabric:worker')
+          if(value == null) {
+              navigation.navigate('LoginWorker')
+          }
+        } catch(e) {
+          alert('Erro ao buscar funcionário')
+        }
+    }
+
+
+    const removeValue = async () => {
+        try {
+          await AsyncStorage.removeItem('@Fabric:worker')
+          navigation.navigate('Home')
+        } catch(e) {
+          // remove error
+        }
+
+      }
+
+    getToken()
 
 
 
@@ -72,10 +96,11 @@ export default function Worker({ navigation }) {
                 />
                 </ButtonContainer>
                 ))}
-
-                
             </ContainerButton>
 
+
+                
+            <TextContainer><Text onPress={removeValue}>Faça logout aqui</Text></TextContainer>
         </>
     )
 }

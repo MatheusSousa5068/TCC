@@ -15,6 +15,7 @@ export const ContainerButton = styled.View`
 
 export const Header = styled.Text`
     font-size: 25px;
+    text-decoration: underline;
 `
 
 export const HeaderDiv = styled.View`
@@ -32,6 +33,13 @@ export const ButtonContainer = styled.View`
 `
 
 export const Text = styled.Text`
-    font-size: 20px;
-    margin-bottom: 5px;
+    color: #5B5A5A;
+    padding-top: 4px;
+    font-size: 15px;
+    text-decoration: underline;
+`
+
+export const TextContainer = styled.View`
+    margin-bottom: 10%;
+    align-items: center;
 `

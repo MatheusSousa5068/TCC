@@ -10,7 +10,6 @@ export const KeyboardView = styled.KeyboardAvoidingView`
 
 export const Container = styled.View`
     flex: 1;
-    padding-top: 20%;
     justify-content: center;
     align-items: center;
     width: 90%;
@@ -31,6 +30,7 @@ export const Input = styled.TextInput`
     font-size: 20px;
     border-radius: 9px;
     width: 90%;
+
 `
 
 export const ButtonSubmit = styled.TouchableOpacity`
@@ -49,13 +49,17 @@ export const TextSubmit = styled.Text`
 `
 
 export const Text = styled.Text`
+    color: #000;
+    margin: 5px 0px;
+`
 
+
+export const ButtonLogin = styled.Text`
     color: #5B5A5A;
     font-size: 15px;
     text-decoration: underline;
 `
-
-export const TextContainer = styled.View`
-    padding-top: 50%;
+export const ContainerLogin = styled.TouchableOpacity`
+    align-items: center;
+    margin-bottom: 25px;
 `
-

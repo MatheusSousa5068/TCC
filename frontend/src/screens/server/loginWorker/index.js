@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Keyboard } from 'react-native';
 
 
 import { 
@@ -14,9 +15,9 @@ import {
     ContainerLogin
 } from './styles'
 
-import Header from '../../components/Header'
+import Header from '../../../components/Header'
 
-export default function Login({ navigation }) {
+export default function LoginWorker({ navigation }) {
     const [email, setEmail] = useState()
     const [senha, setSenha] = useState()
 
@@ -26,7 +27,7 @@ export default function Login({ navigation }) {
             senha: senha
         }
 
-        const result = await fetch('http://10.0.2.2:3000/login', {
+        const result = await fetch('http://10.0.2.2:3000/loginFunc', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +45,7 @@ export default function Login({ navigation }) {
 
         if(data.auth) {
             await storeData(data.token)
-            navigation.navigate('Order')
+            navigation.navigate('Worker')
         } else {
             alert('erro')
         }
@@ -53,16 +54,31 @@ export default function Login({ navigation }) {
     const storeData = async (token) => {
         try {
             await AsyncStorage.setItem(
-                'token',
+                '@Fabric:worker',
                 JSON.stringify(token)
-              );
+            );
         } catch (error) {
             alert('nao salvou o token')
         }
     };
     
     
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
 
+    useEffect(() => {
+     const keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+        () => {
+            setKeyboardVisible(true)
+        }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        () => {
+         setKeyboardVisible(false)
+        }
+        );
+    }, []);
 
     return (
         <>
@@ -70,7 +86,7 @@ export default function Login({ navigation }) {
             <Header />
             
             <Container>
-                <Title>Login</Title>
+                <Title>Login - Funcionário</Title>
                 <Input 
                     placeholderTextColor="gray"
                     placeholder="email"
@@ -86,12 +102,10 @@ export default function Login({ navigation }) {
                     <TextSubmit>Entrar</TextSubmit>
                 </ButtonSubmit>
             </Container>
+            {!keyboardVisible && <ContainerLogin>
+                <ButtonLogin onPress={() => navigation.navigate('Home')}>Voltar para a HomePage</ButtonLogin>
+            </ContainerLogin>}
             
-            <ContainerLogin>
-                <ButtonLogin  onPress={() => navigation.navigate('Signup')}>Se Cadastre Aqui!</ButtonLogin>
-                <Text>Ou</Text>
-                <ButtonLogin onPress={() => navigation.navigate('Home')}>Volte para a HomePage</ButtonLogin>
-            </ContainerLogin>
         </KeyboardView> 
         </>
         

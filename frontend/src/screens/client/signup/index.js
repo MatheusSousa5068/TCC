@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Keyboard } from 'react-native'
 
 import { 
     KeyboardView, 
@@ -12,7 +13,7 @@ import {
     ButtonLogin
 } from './styles'
 
-import Header from '../../components/Header'
+import Header from '../../../components/Header'
 
 export default function Signup({ navigation }) {
     const [nome, setNome] = useState()
@@ -36,16 +37,33 @@ export default function Signup({ navigation }) {
             body: JSON.stringify(data)
         })
 
-        alert('Usuário cadastrado')
+        await alert('Usuário cadastrado')
+        await navigation.navigate('Login')
     }
 
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+     const keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+        () => {
+            setKeyboardVisible(true)
+        }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        () => {
+         setKeyboardVisible(false)
+        }
+        );
+    }, []);
 
     return (
         <>
         <KeyboardView>
             <Header />
             <Container>
-                <Title>Cadastre-se</Title>
+                {!keyboardVisible &&<Title>Cadastre-se</Title>}
                 <Input
                     placeholderTextColor="gray"
                     placeholder="Usuário"
@@ -70,16 +88,16 @@ export default function Signup({ navigation }) {
                 />
 
 
-                <ButtonSubmit onPress={submitData}>
+                {!keyboardVisible && <ButtonSubmit onPress={submitData}>
                     <TextSubmit>Cadastrar</TextSubmit>
-                </ButtonSubmit>
+                </ButtonSubmit>}
             </Container>
             
-            <ContainerLogin>
+            {!keyboardVisible && <ContainerLogin>
                 <ButtonLogin  onPress={() => navigation.navigate('Login')}>Faça Login Aqui!</ButtonLogin>
                 <Text>Ou</Text>
                 <ButtonLogin onPress={() => navigation.navigate('Home')}>Volte para a HomePage</ButtonLogin>
-            </ContainerLogin>
+            </ContainerLogin>}
         </KeyboardView> 
         
         

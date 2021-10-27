@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Container, ButtonLogin, ButtonOrder, TextOrder, Text, ContainerButton, ContainerLogin } from './styles'
 
-import LoginHeader from '../../components/LoginHeader'
+import LoginHeader from '../../../components/LoginHeader'
 
 export default function Home({ navigation }) {
 

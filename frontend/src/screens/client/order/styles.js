@@ -34,12 +34,12 @@ export const Input = styled.TextInput`
 `
 
 export const ButtonSubmit = styled.TouchableOpacity`
-    top: 35px;
     background-color: #FF682B;
     border-radius: 9px;
     width: 50%;
     padding: 15px 20px;
     align-items: center;
+    top: 10%;
 `
 
 export const TextSubmit = styled.Text`
@@ -55,7 +55,7 @@ export const Text = styled.Text`
 `
 
 export const TextContainer = styled.View`
-    padding-top: 40%;
+    padding-top: 30%;
 `
 
 export const PickerContainer = styled.View`

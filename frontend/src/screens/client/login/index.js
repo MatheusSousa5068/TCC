@@ -65,18 +65,25 @@ export default function Login({ navigation }) {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {
-     const keyboardDidShowListener = Keyboard.addListener(
-        'keyboardDidShow',
-        () => {
-            setKeyboardVisible(true)
-        }
-        );
-        const keyboardDidHideListener = Keyboard.addListener(
-        'keyboardDidHide',
-        () => {
-         setKeyboardVisible(false)
-        }
-        );
+        let unmounted = false
+
+               const keyboardDidShowListener = Keyboard.addListener(
+                    'keyboardDidShow',
+
+                    () => {if(!unmounted) {
+                        setKeyboardVisible(true)
+                    }});
+            
+                const keyboardDidHideListener = Keyboard.addListener(
+                    'keyboardDidHide',
+                    () => {if(!unmounted){
+                        setKeyboardVisible(false)
+                    }}); 
+            
+        
+        
+        
+        return () => {unmounted = true}
     }, []);
     
 

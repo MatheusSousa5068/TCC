@@ -13,6 +13,7 @@ export const Container = styled.View`
     justify-content: center;
     align-items: center;
     width: 90%;
+    padding-top: 25px;
 `
 
 export const Title = styled.Text`
@@ -30,16 +31,15 @@ export const Input = styled.TextInput`
     font-size: 20px;
     border-radius: 9px;
     width: 90%;
-
 `
 
 export const ButtonSubmit = styled.TouchableOpacity`
-    top: 35px;
     background-color: #FF682B;
     border-radius: 9px;
     width: 50%;
     padding: 15px 20px;
     align-items: center;
+    margin-bottom: 20px;
 `
 
 export const TextSubmit = styled.Text`
@@ -52,7 +52,6 @@ export const Text = styled.Text`
     color: #000;
     margin: 5px 0px;
 `
-
 
 export const ButtonLogin = styled.Text`
     color: #5B5A5A;

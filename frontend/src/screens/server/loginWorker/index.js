@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Keyboard } from 'react-native';
+import { Keyboard } from 'react-native'
 
 
 import { 
@@ -17,7 +17,7 @@ import {
 
 import Header from '../../../components/Header'
 
-export default function LoginWorker({ navigation }) {
+export default function Login({ navigation }) {
     const [email, setEmail] = useState()
     const [senha, setSenha] = useState()
 
@@ -56,29 +56,36 @@ export default function LoginWorker({ navigation }) {
             await AsyncStorage.setItem(
                 '@Fabric:worker',
                 JSON.stringify(token)
-            );
+              );
         } catch (error) {
             alert('nao salvou o token')
         }
     };
-    
-    
+
     const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {
-     const keyboardDidShowListener = Keyboard.addListener(
-        'keyboardDidShow',
-        () => {
-            setKeyboardVisible(true)
-        }
-        );
-        const keyboardDidHideListener = Keyboard.addListener(
-        'keyboardDidHide',
-        () => {
-         setKeyboardVisible(false)
-        }
-        );
+        let unmounted = false
+
+               const keyboardDidShowListener = Keyboard.addListener(
+                    'keyboardDidShow',
+
+                    () => {if(!unmounted) {
+                        setKeyboardVisible(true)
+                    }});
+            
+                const keyboardDidHideListener = Keyboard.addListener(
+                    'keyboardDidHide',
+                    () => {if(!unmounted){
+                        setKeyboardVisible(false)
+                    }}); 
+            
+        
+        
+        
+        return () => {unmounted = true}
     }, []);
+    
 
     return (
         <>
@@ -102,11 +109,16 @@ export default function LoginWorker({ navigation }) {
                     <TextSubmit>Entrar</TextSubmit>
                 </ButtonSubmit>
             </Container>
-            {!keyboardVisible && <ContainerLogin>
-                <ButtonLogin onPress={() => navigation.navigate('Home')}>Voltar para a HomePage</ButtonLogin>
-            </ContainerLogin>}
             
+            { !keyboardVisible && <ContainerLogin onPress={() => navigation.navigate('Home')}>
+                <ButtonLogin>Volte para a HomePage</ButtonLogin>
+            </ContainerLogin>}
+
+            {}
+
         </KeyboardView> 
+            
+            
         </>
         
     )

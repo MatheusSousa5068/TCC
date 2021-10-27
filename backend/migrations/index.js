@@ -3,7 +3,14 @@ const {
   conn
 } = require('../db');
 
+
+require('dotenv').config();
+const bcrypt = require('bcrypt')
+
+
 async function up() {
+  const saltRounds = 10
+  const hash = await bcrypt.hash(process.env.password, saltRounds)
   // Variáveis com o código de criação das tabelas
   const sql = `
         CREATE TABLE consumidor (
@@ -41,12 +48,17 @@ async function up() {
         );
   `
 
+  const sql5 = `
+        INSERT INTO funcionario (email, nome, senha) VALUES ("${process.env.email}", "${process.env.user}", "${hash}")
+  `
+
   const db = await conn();
 
   await db.run(sql)
   await db.run(sql2)
   await db.run(sql3)
   await db.run(sql4)
+  await db.run(sql5)
 
 }
 

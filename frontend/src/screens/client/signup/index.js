@@ -23,12 +23,12 @@ export default function Signup({ navigation }) {
 
 
     const data = {
-        nome:  nome,
-        email: email,
-        senha: senha
-    }
-
+            nome:  nome,
+            email: email,
+            senha: senha
+        }
     const submitData = async () => {
+
         await fetch('http://10.0.2.2:3000/cadastro', {
             method: "post",
             headers: {
@@ -44,18 +44,25 @@ export default function Signup({ navigation }) {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {
-     const keyboardDidShowListener = Keyboard.addListener(
-        'keyboardDidShow',
-        () => {
-            setKeyboardVisible(true)
-        }
-        );
-        const keyboardDidHideListener = Keyboard.addListener(
-        'keyboardDidHide',
-        () => {
-         setKeyboardVisible(false)
-        }
-        );
+        let unmounted = false
+
+               const keyboardDidShowListener = Keyboard.addListener(
+                    'keyboardDidShow',
+
+                    () => {if(!unmounted) {
+                        setKeyboardVisible(true)
+                    }});
+            
+                const keyboardDidHideListener = Keyboard.addListener(
+                    'keyboardDidHide',
+                    () => {if(!unmounted){
+                        setKeyboardVisible(false)
+                    }}); 
+            
+        
+        
+        
+        return () => {unmounted = true}
     }, []);
 
     return (
@@ -63,7 +70,7 @@ export default function Signup({ navigation }) {
         <KeyboardView>
             <Header />
             <Container>
-                {!keyboardVisible &&<Title>Cadastre-se</Title>}
+                <Title>Cadastre-se</Title>
                 <Input
                     placeholderTextColor="gray"
                     placeholder="Usuário"
@@ -79,25 +86,25 @@ export default function Signup({ navigation }) {
                     placeholderTextColor="gray"
                     placeholder="Senha"
                     secureTextEntry
+                    onChangeText={text => setSenha(text)}
                 />
                 <Input 
                     placeholderTextColor="gray"
                     placeholder="Confirme sua senha"
                     secureTextEntry
-                    onChangeText={text => setSenha(text)}
                 />
 
 
-                {!keyboardVisible && <ButtonSubmit onPress={submitData}>
+                <ButtonSubmit onPress={submitData}>
                     <TextSubmit>Cadastrar</TextSubmit>
-                </ButtonSubmit>}
+                </ButtonSubmit>
             </Container>
             
-            {!keyboardVisible && <ContainerLogin>
+         <ContainerLogin>
                 <ButtonLogin  onPress={() => navigation.navigate('Login')}>Faça Login Aqui!</ButtonLogin>
                 <Text>Ou</Text>
                 <ButtonLogin onPress={() => navigation.navigate('Home')}>Volte para a HomePage</ButtonLogin>
-            </ContainerLogin>}
+            </ContainerLogin>
         </KeyboardView> 
         
         

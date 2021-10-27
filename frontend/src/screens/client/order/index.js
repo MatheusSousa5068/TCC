@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { Picker } from 'react-native';
+import { Picker, Keyboard } from 'react-native';
 
 
 
@@ -80,6 +80,30 @@ export default function Order({ navigation }) {
 
         alert('Pedido Criado com Sucesso')
     }
+
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        let unmounted = false
+
+               const keyboardDidShowListener = Keyboard.addListener(
+                    'keyboardDidShow',
+
+                    () => {if(!unmounted) {
+                        setKeyboardVisible(true)
+                    }});
+            
+                const keyboardDidHideListener = Keyboard.addListener(
+                    'keyboardDidHide',
+                    () => {if(!unmounted){
+                        setKeyboardVisible(false)
+                    }}); 
+            
+        
+        
+        
+        return () => {unmounted = true}
+    }, []);
     
     return (
         <>
@@ -92,7 +116,7 @@ export default function Order({ navigation }) {
             
 
             <Container>
-                <Title>Faça seu pedido</Title>
+                {!keyboardVisible && <Title>Faça seu pedido</Title>}
 
 
                 <Input

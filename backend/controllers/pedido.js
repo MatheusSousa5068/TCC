@@ -1,12 +1,14 @@
 // Models
-const { insert, getAll, getSpecific, deleteSpecific } = require('../models/pedido')
+const { insert, getAll, getSpecific, deleteSpecific, relation, getLast } = require('../models/pedido')
 
 
 const pedido = async (req, res) => {
     const body = req.body
-
-
     await insert(body)
+
+    const resw = await getLast()
+    await relation(body.email._W, resw.codped)
+    
 
     res.setHeader("content-type", "application/json")
     res.sendStatus(200)

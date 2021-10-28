@@ -6,7 +6,7 @@ import CheckBox from '@react-native-community/checkbox';
 import axios from 'axios'
 
 
-import { Space, ContainerButton, Header, HeaderDiv, Button, ButtonContainer, Text, TextContainer } from './styles'
+import { Container, Space, ContainerButton, Header, HeaderDiv, Button, ButtonContainer, Text, TextContainer } from './styles'
 
 export default function Worker({ navigation }) {
     // verificação de login
@@ -52,7 +52,7 @@ export default function Worker({ navigation }) {
     }, []);
 
     return (
-        <>
+        <Container>
             <HeaderDiv>
                 <Header>Projetos Encomendados</Header>
             </HeaderDiv>
@@ -76,6 +76,7 @@ export default function Worker({ navigation }) {
                 </Button>
                 
                 <CheckBox
+                    style={{display: 'flex', alignItems: 'center'}}
                     disabled={false}
                     value={toggleCheckBox}
                     onValueChange={async () => {
@@ -101,6 +102,6 @@ export default function Worker({ navigation }) {
 
                 
             <TextContainer><Text onPress={removeValue}>Faça logout aqui</Text></TextContainer>
-        </>
+        </Container>
     )
 }

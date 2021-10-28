@@ -13,7 +13,7 @@ export default function Home({ navigation }) {
             <Text>O lugar certo para encomendar seu software</Text>
 
             <ContainerButton>
-                <ButtonOrder onPress={() => navigation.navigate('Order')}>
+                <ButtonOrder onPress={() => navigation.navigate('Login')}>
                     <TextOrder>Faça seu pedido</TextOrder>
                 </ButtonOrder>
             </ContainerButton>

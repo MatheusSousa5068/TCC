@@ -15,10 +15,11 @@ import {
 
 import Header from '../../../components/Header'
 
-export default function Signup({ navigation }) {
+export default function Sign({ navigation }) {
     const [nome, setNome] = useState()
     const [email, setEmail] = useState()
     const [senha, setSenha] = useState()
+    const [senha2, setSenha2] = useState()
 
 
 
@@ -26,10 +27,11 @@ export default function Signup({ navigation }) {
             nome:  nome,
             email: email,
             senha: senha
-        }
-    const submitData = async () => {
+    }
 
-        await fetch('http://10.0.2.2:3000/cadastro', {
+    const submitData = async () => {
+        if(senha == senha2) {
+            await fetch('http://10.0.2.2:3000/cadastro', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -39,6 +41,10 @@ export default function Signup({ navigation }) {
 
         await alert('Usuário cadastrado')
         await navigation.navigate('Login')
+        } else {
+            alert('Senhas não coincidem')
+        }
+        
     }
 
     const [keyboardVisible, setKeyboardVisible] = useState(false);
@@ -70,7 +76,7 @@ export default function Signup({ navigation }) {
         <KeyboardView>
             <Header />
             <Container>
-                <Title>Cadastre-se</Title>
+            {!keyboardVisible &&<Title>Cadastre-se</Title>}
                 <Input
                     placeholderTextColor="gray"
                     placeholder="Usuário"
@@ -92,25 +98,25 @@ export default function Signup({ navigation }) {
                     placeholderTextColor="gray"
                     placeholder="Confirme sua senha"
                     secureTextEntry
+                    onChangeText={text => setSenha2(text)}
                 />
 
 
-                <ButtonSubmit onPress={submitData}>
+                {!keyboardVisible &&<ButtonSubmit onPress={submitData}>
                     <TextSubmit>Cadastrar</TextSubmit>
-                </ButtonSubmit>
+                </ButtonSubmit>}
             </Container>
             
-         <ContainerLogin>
+            {!keyboardVisible && <ContainerLogin>
                 <ButtonLogin  onPress={() => navigation.navigate('Login')}>Faça Login Aqui!</ButtonLogin>
                 <Text>Ou</Text>
                 <ButtonLogin onPress={() => navigation.navigate('Home')}>Volte para a HomePage</ButtonLogin>
-            </ContainerLogin>
+            </ContainerLogin>}
         </KeyboardView> 
         
         
         
 
         </>
-        
     )
 }

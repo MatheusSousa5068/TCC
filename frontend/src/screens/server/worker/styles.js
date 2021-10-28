@@ -1,5 +1,10 @@
 import styled from "styled-components/native";
 
+export const Container = styled.View`
+    background-color: #ADD8E6;
+    height: 100%;
+`
+
 export const Space = styled.View`
     align-items: center;
     justify-content: center;
@@ -9,7 +14,7 @@ export const Space = styled.View`
 
 export const ContainerButton = styled.View`
     flex: 1;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 `
 

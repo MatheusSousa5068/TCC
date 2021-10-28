@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 
 const cadastro = async (req, res) => {
     const body = req.body
-
+    console.table(body)
 
     await criarUsuario(body)
 

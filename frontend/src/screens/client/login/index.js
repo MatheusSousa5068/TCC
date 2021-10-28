@@ -44,24 +44,43 @@ export default function Login({ navigation }) {
 
 
         if(data.auth) {
-            await storeData(data.token)
+            await storeData(data.token, data.email)
             navigation.navigate('Order')
         } else {
             alert('erro')
         }
     }
 
-    const storeData = async (token) => {
+    const storeData = async (token, email) => {
         try {
             await AsyncStorage.setItem(
                 'token',
                 JSON.stringify(token)
-              );
+            );
+
+            await AsyncStorage.setItem(
+                'email',
+                JSON.stringify(email)
+            )
         } catch (error) {
-            alert('nao salvou o token')
+            alert('Erro ao tentar salvar o token')
         }
     };
     
+    const getData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('token')
+          if(value !== null) {
+            navigation.navigate('Order')
+          }
+        } catch(e) {
+          // error reading value
+        }
+    }
+
+    getData()
+    
+
     const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {

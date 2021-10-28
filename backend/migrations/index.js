@@ -32,8 +32,8 @@ async function up() {
 
   const sql3 = `
         CREATE TABLE cli_ped (
-            email varchar(20),
-            codped serial,
+            email TEXT,
+            codped INTEGER,
             FOREIGN KEY (email) REFERENCES consumidor(email),
             FOREIGN KEY (codped) REFERENCES pedido(codped)
         );

@@ -21,29 +21,11 @@ import Header from '../../../components/Header'
 
 
 export default function Order({ navigation }) {
-    // verificação de login
-    const getToken = async () => {
-        try {
-          const value = await AsyncStorage.getItem('token')
-          const work = await AsyncStorage.getItem('@Fabric:worker')
-          if(value == null && work == null) {
-              navigation.navigate('Login')
-          }
-        } catch(e) {
-          alert('erro ao tentar pegar token')
-        }
-    }
-
-
-    const isAuth = async () => {
-        if (!getToken()) {
-            
-        }
-    }
 
     const removeValue = async () => {
         try {
           await AsyncStorage.removeItem('token')
+          await AsyncStorage.removeItem('email')
           await AsyncStorage.removeItem('@Fabric:worker')
           navigation.navigate('Home')
         } catch(e) {
@@ -52,22 +34,24 @@ export default function Order({ navigation }) {
 
       }
 
-    getToken()
 
     const [pedido, setPedido] = useState()
     const [descped, setDescped] = useState()
 
-    const [selectedValue, setSelectedValue] = useState();
+    const [selectedValue, setSelectedValue] = useState('game');
 
 
-
+    
+    const email = AsyncStorage.getItem('email')
 
     const data = {
-        pedido: pedido,
-        descped: descped,
-        tipo_projet: selectedValue,
-        concluido: "false"
+            pedido: pedido,
+            descped: descped,
+            tipo_projet: selectedValue,
+            concluido: "false",
+            email: email
     }
+
 
     const submitData = () => {
         fetch('http://10.0.2.2:3000/pedido', {
@@ -79,6 +63,7 @@ export default function Order({ navigation }) {
         })
 
         alert('Pedido Criado com Sucesso')
+        navigation.navigate('Home')
     }
 
     const [keyboardVisible, setKeyboardVisible] = useState(false);

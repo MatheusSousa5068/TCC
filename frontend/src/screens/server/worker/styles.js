@@ -14,7 +14,7 @@ export const Space = styled.View`
 
 export const ContainerButton = styled.View`
     flex: 1;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
 `
 
@@ -30,11 +30,13 @@ export const HeaderDiv = styled.View`
 `
 
 export const Button = styled.TouchableOpacity`
+    margin-top: -5px;
 `
 
 export const ButtonContainer = styled.View`
     margin: 10px 0px;
     flex-direction: row-reverse;
+    align-items: center;
 `
 
 export const Text = styled.Text`

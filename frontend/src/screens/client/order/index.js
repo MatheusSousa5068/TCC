@@ -22,17 +22,16 @@ import Header from '../../../components/Header'
 
 export default function Order({ navigation }) {
 
-    const removeValue = async () => {
-        try {
-          await AsyncStorage.removeItem('token')
-          await AsyncStorage.removeItem('email')
-          await AsyncStorage.removeItem('@Fabric:worker')
-          navigation.navigate('Home')
-        } catch(e) {
-          // remove error
-        }
-
-      }
+const removeValue = async () => {
+    try {
+        await AsyncStorage.removeItem('token')
+        await AsyncStorage.removeItem('email')
+        await AsyncStorage.removeItem('@Fabric:worker')
+        navigation.navigate('Home')
+    } catch(e) {
+        console.log(e)
+    }
+}
 
 
     const [pedido, setPedido] = useState()
@@ -96,10 +95,6 @@ export default function Order({ navigation }) {
             
             <Header />
             
-            
-
-            
-
             <Container>
                 {!keyboardVisible && <Title>Faça seu pedido</Title>}
 

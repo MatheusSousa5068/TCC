@@ -40,16 +40,16 @@ export default function Worker({ navigation }) {
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
     
-    const get = async () => {
-        const { data } = await axios.get('http://10.0.2.2:3000/pedidos')
-        setDados(data)
+const get = async () => {
+    const { data } = await axios.get('http://10.0.2.2:3000/pedidos')
+    setDados(data)
 
-        return data
-    }
+    return data
+}
 
-    useEffect(() => {
-        get();
-    }, []);
+useEffect(() => {
+    get();
+}, []);
 
     return (
         <Container>

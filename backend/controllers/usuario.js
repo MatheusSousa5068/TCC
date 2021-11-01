@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken')
 
 const cadastro = async (req, res) => {
     const body = req.body
-    console.table(body)
 
     await criarUsuario(body)
 
@@ -24,35 +23,33 @@ const login = async (req, res) => {
         senha
     } = req.body
 
-    const usuario = await verificar(email)
+const usuario = await verificar(email)
 
     if (usuario) {
-        const match = await bcrypt.compare(senha, usuario.senha)
+    const match = await bcrypt.compare(senha, usuario.senha)
 
-        if (!match) {
-            res.json({
-                erro: "senha incorreta"
-            })
-        }
-
-        const token = jwt.sign({
-            email
-        }, 'secret', {
-            expiresIn: 10 * 60
-        })
-
+    if (!match) {
         res.json({
-            "auth": true,
-            token,
-            "email": email
+            erro: "senha incorreta"
         })
+    }
+
+    const token = jwt.sign({
+        email
+    }, 'secret', {
+        expiresIn: 10 * 60
+    })
+
+    res.json({
+        "auth": true,
+        token,
+        "email": email
+    })
 
     } else {
-
         res.json({
             erro: "usuário não encontrado"
         })
-
     }
 }
 

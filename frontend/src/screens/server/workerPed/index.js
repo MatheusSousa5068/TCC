@@ -34,6 +34,7 @@ export default function WorkerPed () {
         setData(dados)
     }
 
+    
     useEffect(() => {
         load();
     }, []);

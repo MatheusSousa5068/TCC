@@ -18,7 +18,7 @@ async function up() {
             nome TEXT,
             senha TEXT
         );
-    `;
+`;
 
   const sql2 = `
         CREATE TABLE pedido (
@@ -54,12 +54,11 @@ async function up() {
 
   const db = await conn();
 
-  await db.run(sql)
-  await db.run(sql2)
-  await db.run(sql3)
-  await db.run(sql4)
-  await db.run(sql5)
-
+await db.run(sql)
+await db.run(sql2)
+await db.run(sql3)
+await db.run(sql4)
+await db.run(sql5)
 }
 
 

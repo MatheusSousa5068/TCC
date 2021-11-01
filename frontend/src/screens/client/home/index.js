@@ -5,7 +5,6 @@ import { Container, ButtonLogin, ButtonOrder, TextOrder, Text, ContainerButton, 
 import LoginHeader from '../../../components/LoginHeader'
 
 export default function Home({ navigation }) {
-
     return (
         <Container>
             <LoginHeader />

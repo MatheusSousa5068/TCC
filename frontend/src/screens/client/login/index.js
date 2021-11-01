@@ -27,13 +27,13 @@ export default function Login({ navigation }) {
             senha: senha
         }
 
-        const result = await fetch('http://10.0.2.2:3000/login', {
-            method: "post",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+const result = await fetch('http://10.0.2.2:3000/login', {
+    method: "post",
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
 
         return await result.json()
     }
@@ -74,7 +74,7 @@ export default function Login({ navigation }) {
             navigation.navigate('Order')
           }
         } catch(e) {
-          // error reading value
+          alert('Erro ao tentar pegar token')
         }
     }
 
@@ -100,8 +100,6 @@ export default function Login({ navigation }) {
                     }}); 
             
         
-        
-        
         return () => {unmounted = true}
     }, []);
     
@@ -112,7 +110,7 @@ export default function Login({ navigation }) {
         <KeyboardView>
             <Header />
             
-            <Container>
+        <Container>
                 <Title>Login</Title>
                 <Input 
                     placeholderTextColor="gray"
@@ -128,7 +126,7 @@ export default function Login({ navigation }) {
                 <ButtonSubmit onPress={verify}>
                     <TextSubmit>Entrar</TextSubmit>
                 </ButtonSubmit>
-            </Container>
+        </Container>
             
             {!keyboardVisible && <ContainerLogin>
                 <ButtonLogin  onPress={() => navigation.navigate('Signup')}>Se Cadastre Aqui!</ButtonLogin>
